@@ -3,13 +3,17 @@ import java.util.Properties;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-
+/**
+ * Class to set up database connection
+ * @author Frances Laureano De Leon
+ * @version 2020-10-01
+ */
 public class DatabaseConnection {
 	public static Connection getConnection() {
 		String url, user, password;
 		//Registering JBDC driver
 		try {
-			FileInputStream file = new FileInputStream("MTGLibrary/src/Database.properties");
+			FileInputStream file = new FileInputStream("src/Database.properties");
 			
 			Properties prop = new Properties();
 			prop.load(file);
@@ -23,14 +27,11 @@ public class DatabaseConnection {
 			return connection;
 			
 		}catch(SQLException | IOException ex){
-			System.out.println("Connection not established");
+			System.out.printf(ex + "\n" + "Connection not established");
 			System.exit(0);
 			return null;
 		}
 		
-		//Database URL information
-
-
 	}
 	
 	public static void main(String[] args) {
