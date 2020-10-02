@@ -11,6 +11,16 @@ import java.io.IOException;
 public class DatabaseConnection {
 	public static Connection getConnection() {
 		String url, user, password;
+		Connection connection = null;
+		
+		//loading the driver 
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		//Registering JBDC driver
 		try {
 			FileInputStream file = new FileInputStream("src/Database.properties");
@@ -23,7 +33,8 @@ public class DatabaseConnection {
 			password = prop.getProperty("password");
 			
 			//get connection using DriverManager class
-			Connection connection = DriverManager.getConnection(url, user, password);
+			connection = DriverManager.getConnection(url, user, password);
+			System.out.println("Connection successful!");
 			return connection;
 			
 		}catch(SQLException | IOException ex){
@@ -35,7 +46,8 @@ public class DatabaseConnection {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(getConnection());
+			System.out.println(getConnection());
+
 	}
 	
 
